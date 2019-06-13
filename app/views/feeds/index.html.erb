@@ -1,2 +1,32 @@
-<h1>Feeds#index</h1>
-<p>Find me in app/views/feeds/index.html.erb</p>
+<h1>Feeds</h1>
+<div class="feeds-maincol">
+
+<% @feeds.each do |feed| %>
+  <div class="feed-box">
+    <div class="feed-header">
+      <img src="">
+      <p><a href="">ここに名前が入ります</a></p>
+      <div class="feed-edit-share">
+        <ul>
+          <li><a href="">編集する</a></li>
+          <li><a href="">シェア</a></li>
+          <li><a href="">削除</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="feed-image">
+      <%= image_tag @feed.image.url %>
+    </div>
+    <div class="feed-utility">
+      <ul>
+        <li><a href="">これはlikeボタン</a></li>
+        <li>いいね！100件</li>
+      </ul>
+    </div>
+    <div class="feed-caption">
+      <p><%= feed.caption %></p>
+    </div>
+  </div>
+<% end %>
+
+</div><!--feeds-maincol-->
