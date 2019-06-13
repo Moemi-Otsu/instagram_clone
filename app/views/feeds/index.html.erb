@@ -1,5 +1,6 @@
 <h1>Feeds</h1>
 <div class="feeds-maincol">
+  <%= link_to '新規投稿画面', new_feed_path %>
 
 <% @feeds.each do |feed| %>
   <div class="feed-box">
@@ -8,14 +9,14 @@
       <p><a href="">ここに名前が入ります</a></p>
       <div class="feed-edit-share">
         <ul>
-          <li><a href="">編集する</a></li>
+          <li><%= link_to "編集する", edit_feed_path(feed.id) %></li>
           <li><a href="">シェア</a></li>
           <li><a href="">削除</a></li>
         </ul>
       </div>
     </div>
     <div class="feed-image">
-      <%= image_tag @feed.image.url %>
+      <img src="">
     </div>
     <div class="feed-utility">
       <ul>

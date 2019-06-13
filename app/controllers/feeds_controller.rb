@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  before_action :set_feed, only:[:edit, :update]
 
   def index
     @feeds = Feed.all
@@ -17,10 +18,27 @@ class FeedsController < ApplicationController
     end
   end
 
+  def edit
+    #before_actionに設定
+  end
+
+  def update
+    #before_actionに設定
+    if @feed.update(feed_params)
+      redirect_to feeds_path, notice: "投稿を編集しました"
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def feed_params
-    params.require(:feed).permit(:image, :image_cache)
+    params.require(:feed).permit(:caption, :image, :image_cache)
+  end
+
+  def set_feed
+    @feed = Feed.find(params[:id])
   end
 
 end
