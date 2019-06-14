@@ -11,7 +11,7 @@
         <ul>
           <li><%= link_to "編集する", edit_feed_path(feed.id) %></li>
           <li><a href="">シェア</a></li>
-          <li><a href="">削除</a></li>
+          <li><%= link_to "削除", feed_path(feed.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
         </ul>
       </div>
     </div>
