@@ -6,7 +6,11 @@ class FeedsController < ApplicationController
   end
 
   def new
-    @feed = Feed.new
+    if params[:back]
+      @feed = Feed.new(feed_params)
+    else
+      @feed = Feed.new
+    end
   end
 
   def create
@@ -20,6 +24,11 @@ class FeedsController < ApplicationController
 
   def edit
     #before_actionに設定
+  end
+
+  def confirm
+    @feed = Feed.new(feed_params)
+    render :new if @feed.invalid?
   end
 
   def update
