@@ -15,6 +15,8 @@ class FeedsController < ApplicationController
 
   def create
     @feed = Feed.new(feed_params)
+    @feed.user_id = current_user.id
+    #@feed = current_user.feeds.build(feed_params)
     if @feed.save
     redirect_to feeds_path, notice: "投稿しました"
     else
@@ -28,6 +30,8 @@ class FeedsController < ApplicationController
 
   def confirm
     @feed = Feed.new(feed_params)
+    @feed.user_id = current_user.id
+    #@feed = current_user.feeds.build(feed_params)
     render :new if @feed.invalid?
   end
 
@@ -43,6 +47,10 @@ class FeedsController < ApplicationController
   def destroy
     @feed.destroy
     redirect_to feeds_path, notice: '投稿を削除しました'
+  end
+
+  def show
+    @like = current_user.likes.find_by(feed_id: @feed.id)
   end
 
   private
