@@ -6,4 +6,6 @@ class User < ApplicationRecord
   # has_secure_passwordメソッド:セキュアにハッシュ化したパスワードを、データベース内のpassword_digestというカラムに保存する
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+  # 多対多アソシエーションの設定
+  has_many :likes, dependent: :destroy
 end

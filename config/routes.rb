@@ -7,4 +7,6 @@ Rails.application.routes.draw do
       post :confirm
     end
   end
+  # 多対多アソシエーション
+  resources :likes, only:[:create, :destroy]
 end
