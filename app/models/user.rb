@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
   # 多対多アソシエーションの設定
   has_many :feeds
+  has_many :likes, dependent: :destroy
 end
