@@ -5,4 +5,5 @@ class User < ApplicationRecord
   before_validation { email.downcase! }
   # has_secure_passwordメソッド:セキュアにハッシュ化したパスワードを、データベース内のpassword_digestというカラムに保存する
   has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }
 end
