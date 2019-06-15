@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'likes/new'
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
   # resources :users, only: [:new, :create, :show]

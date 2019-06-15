@@ -19,8 +19,8 @@
       <%= image_tag feed.image %>
     </div>
     <div class="feed-utility">
-    <% like = current_user.likes.find_by(feed_id: feed.id) %>
-    <% unless @feed.user_id == current_user.id %>
+    <% like = feed.likes.find_by(user_id: current_user.id) %>
+    <% unless feed.user_id == current_user.id %>
       <% if like.present? %>
         <%= link_to 'お気に入り解除する', like_path(id: like.id), method: :delete, class: 'btn btn-danger' %>
       <% else %>
