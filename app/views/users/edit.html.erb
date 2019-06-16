@@ -22,5 +22,7 @@
   <%= f.email_field :email, placeholder: 'test@mail.com' %>
   <%= f.label :"パスワード" %>
   <%= f.password_field :password %>
+  <%= f.label :"パスワード再確認" %>
+  <%= f.password_field :password_confirmation %>
   <%= f.submit :"プロフィールを編集" %>
 <% end %>
