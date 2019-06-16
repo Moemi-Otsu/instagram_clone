@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only:[:show, :edit, :update]
 
+  def index
+    @likes = current_user.likes.pluck(:feed_id)
+    @like_feeds = Feed.all.where(id: @likes)
+  end
+
   def new
     @user = User.new
   end

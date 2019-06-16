@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+
   def create
     like = current_user.likes.create(feed_id: params[:feed_id])
     redirect_to feeds_url, notice: "#{like.feed.user.name}さんの投稿をLikeしました"

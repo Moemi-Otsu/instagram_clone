@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
   before_action :set_feed, only:[:edit, :update, :destroy]
 
   def index
-    @feeds = Feed.all
+    @feeds = Feed.all.order(id: "desc")
   end
 
   def new

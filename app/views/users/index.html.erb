@@ -1,21 +1,15 @@
-<h1>Feeds</h1>
-<div class="feeds-maincol">
-  <%= link_to '新規投稿画面', new_feed_path %>
-
-<% @feeds.each do |feed| %>
+<p>お気に入り一覧</p>
+<% @like_feeds.each do |feed| %>
   <div class="feed-box">
     <div class="feed-header">
       <img src="">
       <p><%= link_to feed.user.name, user_path(feed.user.id) %></p>
       <div class="feed-edit-share">
-        <% if feed.user_id == current_user.id %>
         <ul>
           <li><%= link_to "編集する", edit_feed_path(feed.id) %></li>
+          <li><a href="">シェア</a></li>
           <li><%= link_to "削除", feed_path(feed.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
         </ul>
-        <% else %>
-        <p><a href="">シェア</a>
-        <% end %>
       </div>
     </div>
     <div class="feed-image">
@@ -37,5 +31,3 @@
     </div>
   </div>
 <% end %>
-
-</div><!--feeds-maincol-->
