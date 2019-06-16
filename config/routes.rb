@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   end
   # 多対多アソシエーション
   resources :likes, only:[:new, :create, :destroy]
+
+  # ローカル環境でのメール送信確認Gem letter_opener
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
