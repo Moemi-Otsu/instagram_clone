@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # get 'likes/new'
+  root to: "users#new"
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :users do

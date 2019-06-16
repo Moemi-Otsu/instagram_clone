@@ -20,15 +20,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    #before_actionに設定
+    #before_actionにset_userを設定
+    @feeds = current_user.feeds.pluck(:user_id)
+    @user_feeds = Feed.all.where(user_id: @feeds)
   end
 
   def edit
-    #before_actionに設定
+    #before_actionにset_userを設定
   end
 
   def update
-    #before_actionに設定
+    #before_actionにset_userを設定
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "プロフィールを編集しました"
     else

@@ -1,4 +1,6 @@
 <h1><%= @user.name %>のページ</h1>
+
+<div class="user-profile">
 <% if @user.image.url.present? %>
 <p>プロフィール画像：<%= image_tag @user.image.url %></p>
 <% else %>
@@ -10,3 +12,46 @@
 <%= link_to 'プロフィールを編集する', edit_user_path(@user.id) %>
 <% else %>
 <% end %>
+</div>
+
+<div class="user-feeds">
+  <% @user_feeds.each do |feed| %>
+    <div class="feed-box">
+      <div class="feed-header">
+        <% if feed.user.image.url.present? %>
+          <%= image_tag feed.user.image %>
+        <% else %>
+          <%= image_tag 'images/default_person_icon.png' %>
+        <% end %>
+        <p><%= link_to feed.user.name, user_path(feed.user.id) %></p>
+        <div class="feed-edit-share">
+          <% if feed.user_id == current_user.id %>
+          <ul>
+            <li><%= link_to "編集する", edit_feed_path(feed.id) %></li>
+            <li><%= link_to "削除", feed_path(feed.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
+          </ul>
+          <% else %>
+          <p><a href="">シェア</a>
+          <% end %>
+        </div>
+      </div>
+      <div class="feed-image">
+        <%= image_tag feed.image %>
+      </div>
+      <div class="feed-utility">
+      <% like = feed.likes.find_by(user_id: current_user.id) %>
+      <% unless feed.user_id == current_user.id %>
+        <% if like.present? %>
+          <%= link_to 'お気に入り解除する', like_path(id: like.id), method: :delete, class: 'btn btn-danger' %>
+        <% else %>
+          <%= link_to 'お気に入りする', likes_path(feed_id: feed.id), method: :post, class: 'btn btn-primary' %>
+        <% end %>
+      <% end %>
+        <p>いいね！100件</p>
+      </div>
+      <div class="feed-caption">
+        <p><%= feed.caption %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
