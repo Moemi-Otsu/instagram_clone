@@ -5,7 +5,11 @@
 <% @feeds.each do |feed| %>
   <div class="feed-box">
     <div class="feed-header">
-      <%= image_tag feed.user.image %>
+      <% if feed.user.image.url.present? %>
+        <%= image_tag feed.user.image %>
+      <% else %>
+        <%= image_tag 'images/default_person_icon.png' %>
+      <% end %>
       <p><%= link_to feed.user.name, user_path(feed.user.id) %></p>
       <div class="feed-edit-share">
         <% if feed.user_id == current_user.id %>

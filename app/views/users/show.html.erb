@@ -5,4 +5,8 @@
 <p>プロフィール画像：プロフィール画像が設定されていません</p>
 <% end %>
 <p>メールアドレス：<%= @user.email %></p>
+
+<% if @user.id == current_user.id %>
 <%= link_to 'プロフィールを編集する', edit_user_path(@user.id) %>
+<% else %>
+<% end %>
