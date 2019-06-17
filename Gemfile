@@ -39,6 +39,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  # .envファイルの作成用Gem
+  gem 'dotenv-rails'
 end
 
 group :development do
