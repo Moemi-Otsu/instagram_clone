@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'carrierwave'
 gem 'mini_magick'
 
+# seedデータ生成のためのランダムな値を生成できるgem
+gem 'faker'
+
 # has_secure_passwordメソッドを使用するためのbcrypt
 gem 'bcrypt', '3.1.11'
 
