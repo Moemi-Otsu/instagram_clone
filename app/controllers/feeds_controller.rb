@@ -17,8 +17,10 @@ class FeedsController < ApplicationController
     @feed = Feed.new(feed_params)
     @feed.user_id = current_user.id
     #@feed = current_user.feeds.build(feed_params)
+    # Mail mail_adress = Mail.new()
     if @feed.save
-    redirect_to feeds_path, notice: "投稿しました"
+      FeedMailer.feed_mail(@current_user).deliver
+      redirect_to feeds_path, notice: "投稿しました"
     else
       render 'new'
     end
