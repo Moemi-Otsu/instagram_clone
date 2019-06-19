@@ -1,3 +1,4 @@
+<div class="new-col">
 <h1>新規登録</h1>
 
 <% if @user.errors.any? %>
@@ -11,16 +12,19 @@
   </div>
 <% end %>
 
+<dl>
 <%= form_with(model: @user, local: true) do |f| %>
-  <%= f.label :"プロフィール写真" %>
-  <%= f.file_field :image %>
-  <%= f.label :"名前" %>
-  <%= f.text_field :name %>
-  <%= f.label :"メールアドレス" %>
-  <%= f.email_field :email %>
-  <%= f.label :"パスワード" %>
-  <%= f.password_field :password %>
-  <%= f.label :"パスワード再確認" %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit :"アカウントを作成" %>
+  <dt><%= f.label :"プロフィール写真" %></dt>
+  <dd><%= f.file_field :image, class: "input-image" %></dd>
+  <dd><%= f.text_field :name, placeholder: "ユーザーネーム" %></dd>
+  <dd><%= f.email_field :email, placeholder: "sample@mail.com" %></dd>
+  <dd><%= f.password_field :password, placeholder: "パスワードを入力" %></dd>
+  <dd><%= f.password_field :password_confirmation, placeholder: "パスワード再確認" %></dd>
+</dl>
+  <%= f.submit :"アカウントを作成", class: "submit-btn" %>
 <% end %>
+</div>
+
+<div class="new-col new-col-box2">
+  <p>すでにアカウントをお持ちですか？<%= link_to "ログイン", new_session_path %></p>
+</div>

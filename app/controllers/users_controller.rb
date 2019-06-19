@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def index
     @likes = current_user.likes.pluck(:feed_id)
     @like_feeds = Feed.all.where(id: @likes)
+    @users = User.all
   end
 
   def new
@@ -11,8 +12,14 @@ class UsersController < ApplicationController
   end
   
   def create
+    #ユーザー画像のデフォルト値を入力したかった
     @user = User.new(user_params)
+    #if @user.image.present?
+    #  @user.image = "images/default_person_icon.png"
+    #end
+
     if @user.save
+      session[:user_id] = @user.id
       redirect_to user_path(@user.id)
     else
       render 'new'
@@ -22,7 +29,7 @@ class UsersController < ApplicationController
   def show
     #before_actionにset_userを設定
     @feeds = current_user.feeds.pluck(:user_id)
-    @user_feeds = Feed.all.where(user_id: @feeds)
+    @user_feeds = Feed.all.where(user_id: set_user)
   end
 
   def edit

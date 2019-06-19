@@ -1,27 +1,23 @@
-<h1>Feeds</h1>
 <div class="feeds-maincol">
-  <%= link_to '新規投稿画面', new_feed_path %>
-
 <% @feeds.each do |feed| %>
   <div class="feed-box">
     <div class="feed-header">
       <% if feed.user.image.url.present? %>
-        <%= image_tag feed.user.image %>
+        <%= image_tag feed.user.image, class: "user-img" %>
       <% else %>
-        <%= image_tag 'images/default_person_icon.png' %>
+        <%= image_tag 'images/default_person_icon.png', class: "user-img" %>
       <% end %>
-      <p><%= link_to feed.user.name, user_path(feed.user.id) %></p>
+      <p class="feed-username"><%= link_to feed.user.name, user_path(feed.user.id) %></p>
       <div class="feed-edit-share">
         <% if feed.user_id == current_user.id %>
-        <ul>
-          <li><%= link_to "編集する", edit_feed_path(feed.id) %></li>
-          <li><%= link_to "削除", feed_path(feed.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
-        </ul>
+          <ul>
+            <li><%= link_to "編集する", edit_feed_path(feed.id) %></li>
+            <li><%= link_to "削除", feed_path(feed.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></li>
+          </ul>
         <% else %>
-        <p><a href="">シェア</a>
         <% end %>
-      </div>
-    </div>
+      </div><!--feed-edit-share-->
+    </div><!--feed-header-->
     <div class="feed-image">
       <%= image_tag feed.image %>
     </div>
@@ -29,17 +25,29 @@
     <% like = feed.likes.find_by(user_id: current_user.id) %>
     <% unless feed.user_id == current_user.id %>
       <% if like.present? %>
-        <%= link_to 'お気に入り解除する', like_path(id: like.id), method: :delete, class: 'btn btn-danger' %>
+        <%= link_to like_path(id: like.id), method: :delete, class: 'btn btn-danger' do %>
+          <i class="material-icons">favorite</i><!--お気に入りする-->
+        <% end %>
       <% else %>
-        <%= link_to 'お気に入りする', likes_path(feed_id: feed.id), method: :post, class: 'btn btn-primary' %>
+        <%= link_to likes_path(feed_id: feed.id), method: :post, class: 'btn btn-primary' do %>
+          <i class="material-icons">favorite_border</i><!--お気に入り解除-->
+        <% end %>
       <% end %>
     <% end %>
-      <p>いいね！100件</p>
-    </div>
+    <p>いいね！<%= feed.likes.where(feed_id: feed.id).count %>件</p>
+    </div><!--feed-utility-->
     <div class="feed-caption">
       <p><%= feed.caption %></p>
     </div>
   </div>
 <% end %>
-
 </div><!--feeds-maincol-->
+
+<div class="feeds-sidecol">
+  <h2>ユーザー一覧</h2>
+  <ul>
+  <% @users.each do |user| %>
+    <li><%= image_tag user.image, class: "user-img" %><%= link_to user.name, user_path(user.id) %></li>
+  <% end %>
+  </ul>
+</div>

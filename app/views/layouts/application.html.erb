@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,14 +16,44 @@
     <% end %>
 
     <% if logged_in? %>
-      <%= link_to "プロフィール", user_path(current_user.id) %>
-      <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+      <div class="header clearfix">
+        <div class="header-wrapper">
+          <p class="logo"><%= link_to "InstagramClone", feeds_path %></p>
+          <ul>
+            <!--新規投稿-->
+            <li><%= link_to new_feed_path do %>
+              <i class="material-icons">add_circle_outline</i>
+            <% end %></li>
+            <!--プロフィール-->
+            <li><%= link_to user_path(current_user.id) do %>
+              <i class="material-icons">person_outline</i>
+            <% end %></li>
+            <!--いいね一覧-->
+            <li><%= link_to users_path(current_user.id) do %>
+              <i class="material-icons">favorite_border</i>
+            <% end %></li>
+          </ul>
+        </div>
+      </div>
     <% else %>
-      <%= link_to "新規登録", new_user_path %>
-      <%= link_to "ログイン", new_session_path %>
+      <div class="header clearfix">
+        <div class="header-wrapper">
+          <p class="logo"><%= link_to "InstagramClone", new_user_path %></p>
+          <ul>
+            <li><%= link_to "新規登録", new_user_path %></li>
+            <li><%= link_to "ログイン", new_session_path %></li>
+          </ul>
+        </div>
+      </div>
     <% end %>
 
+    <div class="wrapper clearfix">
     <%= yield %>
+    </div>
+
+		<div class="footer">
+		  <p>Instagram Clone</p>
+    </div>
 
   </body>
 </html>

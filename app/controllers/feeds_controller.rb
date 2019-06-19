@@ -3,6 +3,7 @@ class FeedsController < ApplicationController
 
   def index
     @feeds = Feed.all.order(id: "desc")
+    @users = User.all
   end
 
   def new
