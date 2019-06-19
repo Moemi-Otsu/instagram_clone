@@ -93,7 +93,7 @@ h1 {
 
 .wrapper {
   width: 930px;
-  margin: 30px auto 0;
+  margin: 30px auto 30px;
 }
 
 a.utility-btn {
