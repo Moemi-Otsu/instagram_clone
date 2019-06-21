@@ -34,6 +34,9 @@ class UsersController < ApplicationController
 
   def edit
     #before_actionにset_userを設定
+    unless current_user.id == @user.id
+      redirect_to new_session_path
+    end
   end
 
   def update

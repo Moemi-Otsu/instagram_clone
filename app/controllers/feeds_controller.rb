@@ -29,6 +29,9 @@ class FeedsController < ApplicationController
 
   def edit
     #before_actionに設定
+    unless @feed.user_id == current_user.id
+      redirect_to feeds_path
+    end
   end
 
   def confirm
